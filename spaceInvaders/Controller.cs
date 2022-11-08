@@ -68,37 +68,49 @@ namespace spaceInvaders
         /// <summary>
         /// This method manages the application's game loop
         /// </summary>
+
         public void Run()
         {
+            MoveEnemies();
+            DrawEnemies();
+
             motherShip.Draw();
-            enemyDraw();
-            enemyMove();
         }
 
-        public void enemyDraw()
+        public void MoveEnemies()
         {
-            foreach (Enemy enemy in enemies)
+            if (((enemies[enemies.Count - 1].Rectangle.X + 50) > boundaries.Width) || (enemies[0].Rectangle.X < 0))
             {
-                enemy.Draw();
-                enemy.Move();
+                ReverseDirection();
+            }
+
+            MoveEnemiesHorizontal();
+        }
+
+        public void ReverseDirection()
+        {
+            foreach (Enemy eachEnemy in enemies)
+            {
+                eachEnemy.Velocity = new Point(eachEnemy.Velocity.X * -1, eachEnemy.Velocity.Y);
             }
         }
 
-        public void enemyMove()
+        public void MoveEnemiesHorizontal()
         {
-            if ((enemies[0].ePosition_X <= 0) || (enemies[enemies.Count - 1].ePosition_X + 50 >= 800))
+            foreach (Enemy eachEnemy in enemies)
             {
-                foreach (Enemy item in enemies)
-                {
-                    item.Velocity = new Point(item.Velocity.X * -1, item.Velocity.Y);
-                }
+                eachEnemy.Move();
             }
         }
 
+        public void DrawEnemies()
+        {
+            foreach (Enemy eachEnemy in enemies)
+            {
+                eachEnemy.Draw();
 
-
-
-
+            }
+        }
 
         /// <summary>
         /// This method manages the paddle's movement

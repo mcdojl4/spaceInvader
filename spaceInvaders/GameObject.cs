@@ -16,6 +16,7 @@ namespace spaceInvaders
         protected Brush brush;
 
         public Point Velocity { get => velocity; set => velocity = value; }
+        public Rectangle Rectangle { get => rectangle; set => rectangle = value; }
 
         public GameObject(Rectangle rectangle, Color colour, Size boundaries, Graphics graphics, Point velocity)
         {
