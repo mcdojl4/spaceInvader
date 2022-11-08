@@ -11,9 +11,9 @@ namespace spaceInvaders
         //Motherships vars
         private const int mShip_VEL = 20;
         private const int mShip_X = 475;
-        private const int mShip_Y = 500;
-        private const int mShip_WIDTH = 30;
-        private const int mShip_HEIGHT = 50;
+        private const int mShip_Y = 480;
+        private const int mShip_WIDTH = 40;
+        private const int mShip_HEIGHT = 60;
 
         private MotherShip motherShip;
 
@@ -29,6 +29,12 @@ namespace spaceInvaders
         public void Run()
         {
             motherShip.Draw();
+        }
+
+        public void MovePaddleByKeys(Direction direction)
+        {
+            motherShip.Direction = direction;
+            motherShip.Move();
         }
     }
 }

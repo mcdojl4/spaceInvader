@@ -29,5 +29,20 @@ namespace spaceInvaders
             controller.Run();
             graphics.DrawImage(bufferImage, 0, 0);
         }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    controller.MovePaddleByKeys(Direction.LEFT);
+                    break;
+                case Keys.Right:
+                    controller.MovePaddleByKeys(Direction.RIGHT);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
