@@ -16,7 +16,8 @@ namespace spaceInvaders
         private const int mShip_HEIGHT = 60;
 
         //Enemy vars
-        private const int enemy_VEL = 10;
+        private const int enemy_VEL_X = 10;
+        private const int enemy_VEL_Y = 1;
         private const int enemy_X = 375;
         private const int enemy_Y = 500;
         private const int enemy_WIDTH = 50;
@@ -55,7 +56,7 @@ namespace spaceInvaders
                 {
                     enemies.Add(new Enemy(new Rectangle(x, y, enemy_WIDTH, enemy_HEIGHT),
                     Color.FromArgb(random.Next(RGB), random.Next(RGB), random.Next(RGB)),boundaries, graphics, 
-                    new Point(enemy_VEL, enemy_VEL)));
+                    new Point(enemy_VEL_X, enemy_VEL_Y)));
 
                     x += 60;
                 }
@@ -77,6 +78,7 @@ namespace spaceInvaders
             motherShip.Draw();
         }
 
+
         public void MoveEnemies()
         {
             if (((enemies[enemies.Count - 1].Rectangle.X + 50) > boundaries.Width) || (enemies[0].Rectangle.X < 0))
@@ -85,6 +87,7 @@ namespace spaceInvaders
             }
 
             MoveEnemiesHorizontal();
+            MoveEnemiesVertical();
         }
 
         public void ReverseDirection()
@@ -100,6 +103,14 @@ namespace spaceInvaders
             foreach (Enemy eachEnemy in enemies)
             {
                 eachEnemy.Move();
+            }
+        }
+
+        public void MoveEnemiesVertical()
+        {
+            foreach (Enemy eachEnemy in enemies)
+            {
+                eachEnemy.Move_Down();
             }
         }
 
