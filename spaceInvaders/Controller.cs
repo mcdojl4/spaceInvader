@@ -15,11 +15,13 @@ namespace spaceInvaders
         private const int mShip_WIDTH = 40;
         private const int mShip_HEIGHT = 60;
 
-        private MotherShip motherShip;
+
+        private EnemyFleet eFleet;
+        private MotherShip mShip;
 
         public Controller(Size boundries, Graphics graphics)
         {
-            motherShip = new MotherShip(
+            mShip = new MotherShip(
                 new Rectangle(mShip_X, mShip_Y, mShip_WIDTH, mShip_HEIGHT),
                 Color.White, boundries, graphics, new Point(mShip_VEL, mShip_VEL));
 
@@ -28,13 +30,13 @@ namespace spaceInvaders
 
         public void Run()
         {
-            motherShip.Draw();
+            mShip.Draw();
         }
 
         public void MovePaddleByKeys(Direction direction)
         {
-            motherShip.Direction = direction;
-            motherShip.Move();
+            mShip.Direction = direction;
+            mShip.Move();
         }
     }
 }
