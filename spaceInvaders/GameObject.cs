@@ -10,15 +10,17 @@ namespace spaceInvaders
     {
         protected Rectangle rectangle;
         protected Color colour;
-        protected Size boundries;
+        protected Size boundaries;
         protected Graphics graphics;
         protected Point velocity;
         protected Brush brush;
 
-        public GameObject(Rectangle rectangle, Color colour, Size boundries, Graphics graphics, Point velocity)
+        public Point Velocity { get => velocity; set => velocity = value; }
+
+        public GameObject(Rectangle rectangle, Color colour, Size boundaries, Graphics graphics, Point velocity)
         {
             this.rectangle = rectangle;
-            this.boundries = boundries;
+            this.boundaries = boundaries;
             this.graphics = graphics;
             this.velocity = velocity;
 

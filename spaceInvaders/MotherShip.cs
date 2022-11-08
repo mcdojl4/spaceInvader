@@ -11,7 +11,7 @@ namespace spaceInvaders
         private const int MOVEMENT = 5;
         private Direction direction;
 
-        public MotherShip(Rectangle rectangle, Color colour, Size boundries, Graphics graphics, Point velocity) : base(rectangle, colour, boundries, graphics, velocity)
+        public MotherShip(Rectangle rectangle, Color colour, Size boundaries, Graphics graphics, Point velocity) : base(rectangle, colour, boundaries, graphics, velocity)
         {
         }
 
