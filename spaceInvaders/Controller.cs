@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace spaceInvaders
 {
@@ -10,8 +9,8 @@ namespace spaceInvaders
     {
         //Motherships vars
         private const int mShip_VEL = 20;
-        private const int mShip_X = 475;
-        private const int mShip_Y = 480;
+        private const int mShip_X = (1000 / 2) - (40 / 2);
+        private const int mShip_Y = 690;
         private const int mShip_WIDTH = 40;
         private const int mShip_HEIGHT = 60;
 
@@ -73,6 +72,7 @@ namespace spaceInvaders
         public void Run()
         {
             MoveEnemies();
+            MoveEnemiesVertical();
             DrawEnemies();
 
             motherShip.Draw();

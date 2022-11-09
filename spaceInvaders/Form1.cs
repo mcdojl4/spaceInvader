@@ -13,7 +13,7 @@ namespace spaceInvaders
             InitializeComponent();
 
             Width = 1000;
-            Height = 600;
+            Height = 800;
 
             bufferImage = new Bitmap(Width, Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
