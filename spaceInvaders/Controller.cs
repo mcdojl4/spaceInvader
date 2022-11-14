@@ -22,14 +22,22 @@ namespace spaceInvaders
         private const int enemy_WIDTH = 50;
         private const int enemy_HEIGHT = 50;
 
+        //Bullet vars
+        private const int bullet_VEL_X = 10;
+        private const int bullet_VEL_Y = 1;
+        private const int bullet_X= 0;
+        private const int bullet_Y = (mShip_Y + enemy_HEIGHT);
+        private const int bullet_WIDTH = 10;
+        private const int bullet_HEIGHT = 15;
+
         private const int RGB = 256;
 
         private Random random;
         private MotherShip motherShip;
-        //private Enemy enemy;
+        private Bullet bullet;
         private Size boundaries;
 
-
+        private List<Bullet> bullets;
         private List<Enemy> enemies;
 
         /// <summary>
@@ -46,8 +54,13 @@ namespace spaceInvaders
                 Color.White, boundaries, graphics, new Point(mShip_VEL, mShip_VEL));
 
             enemies = new List<Enemy>();
+            bullets = new List<Bullet>();
+
+            bullets.Add(new Bullet(new Rectangle((motherShip.Rectangle.X + (mShip_WIDTH / 2)), bullet_Y, bullet_WIDTH, bullet_HEIGHT),
+                    Color.FromArgb(random.Next(RGB), random.Next(RGB), random.Next(RGB)), boundaries, graphics,
+                    new Point(bullet_VEL_X, bullet_VEL_Y)));
+
             int y = 20;
-            
             for (int i = 0; i < 4; i++)
             {
                 int x = 20;
@@ -71,6 +84,7 @@ namespace spaceInvaders
 
         public void Run()
         {
+            DrawBullets();
             MoveEnemies();
             MoveEnemiesVertical();
             DrawEnemies();
@@ -78,7 +92,7 @@ namespace spaceInvaders
             motherShip.Draw();
         }
 
-
+        //Enemies move and collision mechanics
         public void MoveEnemies()
         {
             if (((enemies[enemies.Count - 1].Rectangle.X + 50) > boundaries.Width) || (enemies[0].Rectangle.X < 0))
@@ -123,14 +137,29 @@ namespace spaceInvaders
             }
         }
 
+        public void DrawBullets()
+        {
+            foreach (Bullet eachBullet in bullets)
+            {
+                eachBullet.Draw();
+
+            }
+        }
+
         /// <summary>
-        /// This method manages the paddle's movement
+        /// This method manages the motherships movement
         /// </summary>
         /// <param name="direction"></param>
-        public void MovePaddleByKeys(Direction direction)
+        public void MoveMothershipByKeys(Direction direction)
         {
             motherShip.Direction = direction;
             motherShip.Move();
+        }
+
+        public void ShootBullet(Shooting shooting)
+        {
+            bullet.Shooting = shooting;
+            bullet.Move();
         }
 
     }

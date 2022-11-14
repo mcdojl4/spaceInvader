@@ -27,12 +27,18 @@ namespace spaceInvaders
             switch (direction)
             {
                 case Direction.LEFT:
-                    rectangle.X -= MOVEMENT;
+                    if (rectangle.X > 0) {
+                        rectangle.X -= MOVEMENT;
+                    }
                     break;
                 case Direction.RIGHT:
-                    rectangle.X += MOVEMENT;
+                    if (rectangle.X + 50 < boundaries.Width)
+                    {
+                        rectangle.X += MOVEMENT;
+                    }
                     break;
                 default:
+
                     break;
             }
         }

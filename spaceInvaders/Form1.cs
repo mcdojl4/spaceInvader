@@ -35,10 +35,13 @@ namespace spaceInvaders
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    controller.MovePaddleByKeys(Direction.LEFT);
+                    controller.MoveMothershipByKeys(Direction.LEFT);
                     break;
                 case Keys.Right:
-                    controller.MovePaddleByKeys(Direction.RIGHT);
+                    controller.MoveMothershipByKeys(Direction.RIGHT);
+                    break;
+                case Keys.Space:
+                    controller.ShootBullet(Shooting.SHOOT);
                     break;
                 default:
                     break;
