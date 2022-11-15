@@ -8,11 +8,14 @@ namespace spaceInvaders
 {
     public class Bullet : GameObject
     {
-        private const int MOVEMENT = 5;
-        private Shooting shooting;
+        protected Rectangle rectangle;
+        protected bool alive;
 
         public Bullet(Rectangle rectangle, Color colour, Size boundaries, Graphics graphics, Point velocity) : base(rectangle, colour, boundaries, graphics, velocity)
         {
+            this.rectangle = rectangle;
+            this.alive = alive;
+
         }
 
         public override void Draw()
@@ -25,6 +28,5 @@ namespace spaceInvaders
             rectangle.Y -= velocity.Y;
         }
 
-        public Shooting Shooting { get => shooting; set => shooting = value; }
     }
 }

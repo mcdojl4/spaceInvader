@@ -41,7 +41,7 @@ namespace spaceInvaders
                     controller.MoveMothershipByKeys(Direction.RIGHT);
                     break;
                 case Keys.Space:
-                    controller.ShootBullet(Shooting.SHOOT);
+                    controller.ShootBullet();
                     break;
                 default:
                     break;

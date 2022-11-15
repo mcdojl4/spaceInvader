@@ -23,10 +23,10 @@ namespace spaceInvaders
         private const int enemy_HEIGHT = 50;
 
         //Bullet vars
-        private const int bullet_VEL_X = 10;
+        private const int bullet_VEL_X = 200;
         private const int bullet_VEL_Y = 1;
-        private const int bullet_X= 0;
-        private const int bullet_Y = (mShip_Y + enemy_HEIGHT);
+        private const int bullet_X = 0;
+        private const int bullet_Y = (mShip_Y - bullet_HEIGHT);
         private const int bullet_WIDTH = 10;
         private const int bullet_HEIGHT = 15;
 
@@ -34,20 +34,17 @@ namespace spaceInvaders
 
         private Random random;
         private MotherShip motherShip;
-        private Bullet bullet;
         private Size boundaries;
 
         private List<Bullet> bullets;
         private List<Enemy> enemies;
+        private Graphics graphics;
 
-        /// <summary>
-        /// Controller's constructor
-        /// </summary>
-        /// <param name="boundries">This refers to the client size</param>
-        /// <param name="graphics">This refers to the graphics object</param>
+        // Controller's constructor
         public Controller(Size boundaries, Graphics graphics)
         {
             this.boundaries = boundaries;
+            this.graphics = graphics;
             random = new Random();
             motherShip = new MotherShip(
                 new Rectangle(mShip_X, mShip_Y, mShip_WIDTH, mShip_HEIGHT),
@@ -56,10 +53,6 @@ namespace spaceInvaders
             enemies = new List<Enemy>();
             bullets = new List<Bullet>();
 
-            bullets.Add(new Bullet(new Rectangle((motherShip.Rectangle.X + (mShip_WIDTH / 2)), bullet_Y, bullet_WIDTH, bullet_HEIGHT),
-                    Color.FromArgb(random.Next(RGB), random.Next(RGB), random.Next(RGB)), boundaries, graphics,
-                    new Point(bullet_VEL_X, bullet_VEL_Y)));
-
             int y = 20;
             for (int i = 0; i < 4; i++)
             {
@@ -67,7 +60,7 @@ namespace spaceInvaders
                 for (int j = 0; j < 10; j++)
                 {
                     enemies.Add(new Enemy(new Rectangle(x, y, enemy_WIDTH, enemy_HEIGHT),
-                    Color.FromArgb(random.Next(RGB), random.Next(RGB), random.Next(RGB)),boundaries, graphics, 
+                    Color.FromArgb(random.Next(RGB), random.Next(RGB), random.Next(RGB)), boundaries, graphics,
                     new Point(enemy_VEL_X, enemy_VEL_Y)));
 
                     x += 60;
@@ -78,18 +71,22 @@ namespace spaceInvaders
 
         }
 
-        /// <summary>
-        /// This method manages the application's game loop
-        /// </summary>
-
+        // This method manages the application's game loop
         public void Run()
         {
-            DrawBullets();
-            MoveEnemies();
-            MoveEnemiesVertical();
             DrawEnemies();
+            MoveEnemies();
+
+
+            //if (enemies.CheckforCollision(bullets))
+            //{
+            //    //Add to score
+            //}
 
             motherShip.Draw();
+
+            DrawBullets();
+            BulletMove();
         }
 
         //Enemies move and collision mechanics
@@ -98,10 +95,10 @@ namespace spaceInvaders
             if (((enemies[enemies.Count - 1].Rectangle.X + 50) > boundaries.Width) || (enemies[0].Rectangle.X < 0))
             {
                 ReverseDirection();
+                MoveEnemiesVertical();
             }
 
             MoveEnemiesHorizontal();
-            MoveEnemiesVertical();
         }
 
         public void ReverseDirection()
@@ -137,30 +134,62 @@ namespace spaceInvaders
             }
         }
 
+        //Bullet mechanics
         public void DrawBullets()
         {
             foreach (Bullet eachBullet in bullets)
             {
                 eachBullet.Draw();
-
             }
         }
 
-        /// <summary>
-        /// This method manages the motherships movement
-        /// </summary>
-        /// <param name="direction"></param>
+        public void BulletMove()
+        {
+            foreach (Bullet eachBullet in bullets)
+            {
+                eachBullet.Move();
+            }
+        }
+
+        public bool CheckForCollisions(List<Bullet> bullets)
+        {
+
+            bool collision = false;
+
+            foreach(Enemy eachEnemy in enemies)
+            {
+                foreach (Bullet eachBullet in bullets)
+                {
+                    if (eachEnemy.HitMe(eachBullet))
+                    {
+                        //eachEnemy.Alive = false;
+                        //eachEnemy.Alive = false;
+
+                        //Remove at
+                        collision = true;
+                        break;
+                    }
+                }
+            }
+            return collision;
+        }
+
+        // This method manages the motherships movement
         public void MoveMothershipByKeys(Direction direction)
         {
             motherShip.Direction = direction;
             motherShip.Move();
         }
 
-        public void ShootBullet(Shooting shooting)
+        //This method adds a bullet when space is pressed
+        public void ShootBullet()
         {
-            bullet.Shooting = shooting;
-            bullet.Move();
+            bullets.Add(new Bullet(
+                new Rectangle(motherShip.Rectangle.X + (mShip_WIDTH / 2), bullet_Y, bullet_WIDTH, bullet_HEIGHT),
+                Color.White,
+                boundaries,
+                graphics,
+                new Point(20, 20)));
         }
-
     }
 }

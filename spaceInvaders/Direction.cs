@@ -9,6 +9,7 @@ namespace spaceInvaders
     public enum Direction : byte
     {
         LEFT,
-        RIGHT
+        RIGHT,
+        Shooting
     }
 }
