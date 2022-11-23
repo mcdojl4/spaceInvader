@@ -15,21 +15,25 @@ namespace spaceInvaders
             this.alive = alive;
         }
 
+        //Draws enemys
         public override void Draw()
         {
             graphics.FillRectangle(brush, rectangle);
         }
 
+        //Moves enemies across screen
         public override void Move()
         {
             rectangle.X += velocity.X;
         }
 
+        //Makes enemies move down 20 pixels
         public void Move_Down()
         {
             rectangle.Y += 20;
         }
 
+        //Checks if enemy is hit by bullet
         public bool HitMe(Bullet bullet)
         {
             bool collided = false;
@@ -51,7 +55,7 @@ namespace spaceInvaders
 
             return collided;
         }
-
+        //Allows controller to use alive variable
         protected bool Alive { get => alive; set => alive = value; }
     }
 }

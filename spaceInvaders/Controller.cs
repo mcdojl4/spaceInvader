@@ -31,7 +31,7 @@ namespace spaceInvaders
         private const int bullet_HEIGHT = 15;
 
         private const int RGB = 256;
-
+        //Sets class vars
         private Random random;
         private MotherShip motherShip;
         private Size boundaries;
@@ -52,7 +52,8 @@ namespace spaceInvaders
 
             enemies = new List<Enemy>();
             bullets = new List<Bullet>();
-
+            
+            //Spawns players in for loops
             int y = 20;
             for (int i = 0; i < 4; i++)
             {
@@ -101,6 +102,7 @@ namespace spaceInvaders
             MoveEnemiesHorizontal();
         }
 
+        //Used when enemy hits edge and changes direction
         public void ReverseDirection()
         {
             foreach (Enemy eachEnemy in enemies)
@@ -109,6 +111,7 @@ namespace spaceInvaders
             }
         }
 
+        //Moves enemy across
         public void MoveEnemiesHorizontal()
         {
             foreach (Enemy eachEnemy in enemies)
@@ -117,6 +120,7 @@ namespace spaceInvaders
             }
         }
 
+        //Moves enemy down
         public void MoveEnemiesVertical()
         {
             foreach (Enemy eachEnemy in enemies)
@@ -125,6 +129,7 @@ namespace spaceInvaders
             }
         }
 
+        //Draws enemies
         public void DrawEnemies()
         {
             foreach (Enemy eachEnemy in enemies)
@@ -135,6 +140,7 @@ namespace spaceInvaders
         }
 
         //Bullet mechanics
+        //Draws bullets
         public void DrawBullets()
         {
             foreach (Bullet eachBullet in bullets)
@@ -143,6 +149,7 @@ namespace spaceInvaders
             }
         }
 
+        //Makes bullet move
         public void BulletMove()
         {
             foreach (Bullet eachBullet in bullets)
@@ -151,6 +158,7 @@ namespace spaceInvaders
             }
         }
 
+        //Checks for collision between bullets and enemy
         public bool CheckForCollisions(List<Bullet> bullets)
         {
 

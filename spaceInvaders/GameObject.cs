@@ -27,7 +27,7 @@ namespace spaceInvaders
 
             brush = new SolidBrush(colour);
         }
-
+        //Allows other classes to use this abstract
         public abstract void Draw();
 
         public abstract void Move();

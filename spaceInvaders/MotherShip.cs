@@ -16,12 +16,13 @@ namespace spaceInvaders
         }
 
 
-
+        //Draws the main ship
         public override void Draw()
         {
             graphics.FillRectangle(brush, rectangle);
         }
 
+        //Uses arrow keys to move player
         public override void Move()
         {
             switch (direction)
@@ -42,6 +43,7 @@ namespace spaceInvaders
                     break;
             }
         }
+        //Allows direction to be used in Controller
         public Direction Direction { get => direction; set => direction = value; }
     }
 }

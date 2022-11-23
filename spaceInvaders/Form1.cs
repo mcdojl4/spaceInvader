@@ -5,13 +5,13 @@ namespace spaceInvaders
         private Graphics graphics;
         private Bitmap bufferImage;
         private Graphics bufferGraphics;
-
         private Controller controller;
 
         public Form1()
         {
             InitializeComponent();
 
+            //Sets size of form
             Width = 1000;
             Height = 800;
 
@@ -23,6 +23,7 @@ namespace spaceInvaders
             timer1.Enabled = true;
         }
 
+        //Makes game run per tick
         private void timer1_Tick(object sender, EventArgs e)
         {
             bufferGraphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
@@ -30,6 +31,7 @@ namespace spaceInvaders
             graphics.DrawImage(bufferImage, 0, 0);
         }
 
+        //Uses keyboard for players to move
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)

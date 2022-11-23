@@ -18,11 +18,13 @@ namespace spaceInvaders
 
         }
 
+        //Bullet draw
         public override void Draw()
         {
             graphics.FillRectangle(brush, rectangle);
         }
 
+        //Bullet moves up the screen
         public override void Move()
         {
             rectangle.Y -= velocity.Y;
